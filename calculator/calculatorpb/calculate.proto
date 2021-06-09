@@ -1,0 +1,39 @@
+syntax="proto3";
+
+
+package calculator;
+option go_package="/calculatorpb";
+
+//message
+message Cal {
+    int32 intput_1=1;
+    int32 intput_2=2;
+}
+
+//request
+message CalRequest {
+    Cal cal=1;
+}
+
+//response
+message CalResponse {
+    int32 output=1;
+}
+
+//CalManyTimesResponse
+message CalManyTimesRequest {
+    Cal cal=1;
+}
+
+//CalManyTimesResponse
+message CalManyTimesResponse {
+    int32 output=1;
+}
+
+//service rpc
+service CalService {
+    //unary
+    rpc  calculate (CalRequest) returns (CalResponse) {};
+    //server streaming
+    rpc calculateManyTimes (CalManyTimesRequest) returns (stream CalManyTimesResponse) {};
+}
